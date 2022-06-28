@@ -2,16 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 
 const words = [
-  'sári',
-  'alma',
-  'kukac',
-  'bori',
-  'cica',
-  'sapka'
-]
-
-const emojis = [
-  '👧🏻', '🍎', '🐛', '🐕‍🦺', '🐈', '🧢'
+  ['sári',    '👧🏻'],
+  ['alma',    '🍎'],
+  ['kukac',   '🐛'],
+  ['bori',    '🐕‍🦺'],
+  ['cica',    '🐈'],
+  ['sapka',   '🧢'],
+  ['vödör',   '🪣'],
+  ['felhő',   '☁️'],
+  ['bicikli', '🚲'],
+  ['fog',     '🦷'],
+  ['rendőr',  '👮🏻‍♀️'],
+  ['tű',      '🪡'],
+  ['táska',   '🎒'],
+  ['rák',     '🦀'],
+  ['zebra',   '🦓'],
+  ['egér',    '🐀'],
+  ['banán',   '🍌'],
 ]
 
 const Example = () => {
@@ -62,12 +69,13 @@ const Example = () => {
   const [isEmojiVisible, showEmoji] = useState(false)
 
   useEffect(() => {
-    if (words[wordIndex]?.length === letterIndex){
-      speak({ text: words[wordIndex], voice: voices[0] })
+    if (words[wordIndex]?.[0].length === letterIndex){
+      speak({ text: words[wordIndex]?.[0], voice: voices[0] })
       showEmoji(true)
+
       setTimeout(() => {
         showEmoji(false)
-        setWordIndex(wordIndex + 1)
+        setWordIndex(wordIndex === words.length - 1 ? 0 : wordIndex + 1)
         setLetterIndex(0)
       }, 2500)
     }
@@ -78,7 +86,7 @@ const Example = () => {
       speak({ text: letterMap[key], voice: voices[0] })
     }
 
-    if (key === words[wordIndex]?.[letterIndex]){
+    if (key === words[wordIndex]?.[0][letterIndex]){
       setLetterIndex(letterIndex + 1)
     }
   }
@@ -96,11 +104,11 @@ const Example = () => {
   return (
     <>
     <div style={{ padding: 50, fontSize: 148, fontWeight: 'bold', textTransform: 'uppercase' }}>
-      {words[wordIndex]?.split('').map((letter, i) => (
+      {words[wordIndex]?.[0]?.split('').map((letter, i) => (
         <span key={i} style={{ color: i < letterIndex ? 'black' : 'gray' }}>{letter}</span>
       ))}
     </div>
-    <div style={{ fontSize: 200, margin: 50 }}>{isEmojiVisible && emojis[wordIndex]}</div>
+    <div style={{ fontSize: 200, margin: 50 }}>{isEmojiVisible && words[wordIndex][1]}</div>
     </>
   );
 };

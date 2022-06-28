@@ -97,7 +97,7 @@ const Example = () => {
     <>
     <div style={{ padding: 50, fontSize: 148, fontWeight: 'bold', textTransform: 'uppercase' }}>
       {words[wordIndex]?.split('').map((letter, i) => (
-        <span style={{ color: i < letterIndex ? 'black' : 'gray' }}>{letter}</span>
+        <span key={i} style={{ color: i < letterIndex ? 'black' : 'gray' }}>{letter}</span>
       ))}
     </div>
     <div style={{ fontSize: 200, margin: 50 }}>{isEmojiVisible && emojis[wordIndex]}</div>

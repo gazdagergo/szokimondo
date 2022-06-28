@@ -3,16 +3,20 @@ import { useSpeechSynthesis } from 'react-speech-kit';
 
 const words = [
   'sári',
-  'alma'
+  'alma',
+  'kukac',
+  'bori',
+  'cica',
+  'sapka'
+]
+
+const emojis = [
+  '👧🏻', '🍎', '🐛', '🐕‍🦺', '🐈', '🧢'
 ]
 
 const Example = () => {
-  const [text, setText] = useState('I am a robot');
-  const onEnd = () => {
-    // You could do something here after speaking has finished
-  };
   const { speak, cancel, speaking, supported, voices } = useSpeechSynthesis({
-    onEnd,
+    onEnd: () => null,
   });
 
   const letterMap = {
@@ -55,11 +59,14 @@ const Example = () => {
 
   const [letterIndex, setLetterIndex] = useState(0)
   const [wordIndex, setWordIndex] = useState(0)
+  const [isEmojiVisible, showEmoji] = useState(false)
 
   useEffect(() => {
     if (words[wordIndex]?.length === letterIndex){
       speak({ text: words[wordIndex], voice: voices[0] })
+      showEmoji(true)
       setTimeout(() => {
+        showEmoji(false)
         setWordIndex(wordIndex + 1)
         setLetterIndex(0)
       }, 2500)
@@ -87,11 +94,14 @@ const Example = () => {
 
 
   return (
+    <>
     <div style={{ padding: 50, fontSize: 148, fontWeight: 'bold', textTransform: 'uppercase' }}>
       {words[wordIndex]?.split('').map((letter, i) => (
         <span style={{ color: i < letterIndex ? 'black' : 'gray' }}>{letter}</span>
       ))}
     </div>
+    <div style={{ fontSize: 200, margin: 50 }}>{isEmojiVisible && emojis[wordIndex]}</div>
+    </>
   );
 };
 

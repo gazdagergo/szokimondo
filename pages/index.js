@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 
 const words = [
+  ['malac', '🐷'],
+  ['láb', '🦵'],
+  ['izom', '💪'],
+  ['autó', '🚗'],
+  ['strand', '🏖'],
+  ['ország', '🇨🇺'],
+  ['videó', '🎬'],
+  ['karate', '🥋🥊'],
+  ['bence', '👦🏼'],
+  ['család', '👨‍👩‍👦‍👦'],
+  ['ábel', '👦🏻'],
+  ['apa', '👨🏻‍💻'],
+  ['nagymama', '🧓🏼'],  
   ['sári',    '👧🏻'],
   ['alma',    '🍎'],
   ['kukac',   '🐛'],
@@ -19,6 +32,7 @@ const words = [
   ['zebra',   '🦓'],
   ['egér',    '🐀'],
   ['banán',   '🍌'],
+
 ]
 
 const Example = () => {
